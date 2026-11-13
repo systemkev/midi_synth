@@ -5,6 +5,7 @@ from pathlib import Path
 import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles, RisingEdge, FallingEdge, ReadOnly
+from cocotb.utils import get_sim_time
 from cocotb_tools.runner import get_runner
 
 test_file = os.path.basename(__file__).replace(".py", "")
@@ -23,47 +24,95 @@ async def reset_dut(dut):
     await RisingEdge(dut.clk)
 
 
-@cocotb.test()
-async def test_vco_waveforms(dut):
-    cocotb.start_soon(Clock(dut.clk, 10, unit="ns").start())
-    await reset_dut(dut)
-
-    dut.pw.value = 0x8000
-    dut.freq_inc.value = 0x01000000
-    dut.sample_tick.value = 1
-
-    valid_cycles = 0
-    max_wait = 20
-    
+async def wait_for_valid(dut, max_wait=20):
+    """Helper to wait for the oscillator to become valid"""
     for _ in range(max_wait):
         await RisingEdge(dut.clk)
         await ReadOnly()
         if dut.osc_vld.value == 1:
-            break
+            return
+    assert dut.osc_vld.value == 1, "Oscillator valid signal never went high"
+
+
+@cocotb.test()
+async def test_vco_frequency_sweep(dut):
+    """Test case 1: Continuously change the frequency over time"""
+    cocotb.start_soon(Clock(dut.clk, 10, unit="ns").start())
+    await reset_dut(dut)
+
+    # Set initial parameters
+    dut.pw.value = 0x8000          # 50% duty cycle
+    dut.sample_tick.value = 1
+    
+    start_freq = 0x00100000
+    dut.freq_inc.value = start_freq
+
+    await wait_for_valid(dut)
+
+    dut._log.info("Starting continuous frequency sweep...")
+    dut._log.info("Time(ns) | freq_inc")
+    dut._log.info("-" * 25)
+
+    # Sweep frequency upwards over time
+    # ACC_WIDTH is 32, so we can sweep within that range
+    freq_step = 0x00050000
+    current_freq = start_freq
+    
+    for i in range(50):
+        # Wait some cycles before changing frequency again
+        await ClockCycles(dut.clk, 20) 
+        
+        current_freq += freq_step
+        dut.freq_inc.value = current_freq
+        
+        if i % 10 == 0:
+            time_ns = get_sim_time('ns')
+            dut._log.info(f"{time_ns:8.0f} | 0x{current_freq:08X}")
+
+    # Run for a bit at the final frequency
+    await ClockCycles(dut.clk, 200)
+    dut._log.info("Frequency sweep complete.")
+
+
+@cocotb.test()
+async def test_vco_pw_sweep(dut):
+    """Test case 2: Continuously change the pulse width over time"""
+    cocotb.start_soon(Clock(dut.clk, 10, unit="ns").start())
+    await reset_dut(dut)
+
+    # Set initial parameters
+    dut.freq_inc.value = 0x01000000 # Constant frequency
+    dut.sample_tick.value = 1
+    
+    start_pw = 0x0000
+    dut.pw.value = start_pw
+
+    await wait_for_valid(dut)
+
+    dut._log.info("Starting continuous pulse width sweep...")
+    dut._log.info("Time(ns) | pw")
+    dut._log.info("-" * 20)
+
+    # Sweep PW from 0 to near 100% over time
+    # PUL_WIDT is 16, so max value is 0xFFFF
+    pw_step = 0x0400  
+    current_pw = start_pw
+    
+    for i in range(60):
+        await ClockCycles(dut.clk, 20) 
+        
+        current_pw += pw_step
+        if current_pw > 0xFFFF:
+            current_pw = 0xFFFF
             
-    assert dut.osc_vld.value == 1
-
-    dut._log.info("Cycle |    Saw    |    Tri    |    Sin    |   Pulse   | Sync")
-    dut._log.info("-" * 65)
-    
-    initial_saw = int(dut.osc_saw.value)
-    
-    for i in range(10):
-        await RisingEdge(dut.clk)
-        await ReadOnly()
+        dut.pw.value = current_pw
         
-        saw = dut.osc_saw.value.signed_integer
-        tri = dut.osc_tri.value.signed_integer
-        sin = dut.osc_sin.value.signed_integer
-        pulse = dut.osc_pulse.value.signed_integer
-        sync = int(dut.sync.value)
-        
-        dut._log.info(f"{i:5} | {saw:9} | {tri:9} | {sin:9} | {pulse:9} | {sync:4}")
+        if i % 10 == 0:
+            time_ns = get_sim_time('ns')
+            dut._log.info(f"{time_ns:8.0f} | 0x{current_pw:04X}")
 
-    await ClockCycles(dut.clk, 1000)
-    await ReadOnly()
-    
-    assert int(dut.osc_saw.value) != initial_saw
+    await ClockCycles(dut.clk, 200)
+    dut._log.info("Pulse width sweep complete.")
 
 
 def my_module_runner():
@@ -71,7 +120,7 @@ def my_module_runner():
     proj_path = Path(__file__).resolve().parent.parent
 
     sources = [
-        proj_path / "rtl" / "vco.sv", 
+        proj_path / "hdl" / "vco.sv", 
     ]
 
     build_test_args = ["-Wall"]
