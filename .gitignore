@@ -5,6 +5,9 @@
 !/hdl/
 !/scripts/
 !/sim/
+!/ip/
+!/obj/
+!//xdc/
 
 !/.gitignore
 
