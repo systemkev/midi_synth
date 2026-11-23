@@ -5,6 +5,8 @@ module top_level (
     input  wire clk_100mhz,
     input  wire rst_bttn,
     input  wire uart_rx,
+    
+    output logic uart_tx,
 
     output logic I2S2_MCLK,
     output logic I2S2_SCLK,
@@ -14,7 +16,7 @@ module top_level (
 
     logic sys_clk;
     logic [31:0] midi_note_lut [0:127];
-
+ 
     initial begin 
         $readmemh("mem/midi_phase_inc.mem", midi_note_lut);
     end 
@@ -72,6 +74,21 @@ module top_level (
         .midi_data1   (midi_data1),
         .midi_data2   (midi_data2)
     );  
+
+    // uart_tx #(
+    //     .CLK_HZ (98_297_872),
+    //     .BAUD   (115_200)
+    // ) u_debug_uart (
+    //     .i_clk   (sys_clk),
+    //     .i_rst   (rst),
+
+    //     .i_valid (uart_vld),
+    //     .i_data  (uart_byte),
+
+    //     .o_ready (),
+    //     .o_tx    (uart_tx),
+    //     .o_done  ()
+    // );
 
     always_ff @(posedge sys_clk) begin 
         if (rst) begin 

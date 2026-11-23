@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2026.1 (win64) Build 6511674 Tue Jun 16 11:02:23 MDT 2026
-| Date         : Mon Nov 16 10:42:51 2026
+| Date         : Wed Nov 18 19:26:32 2026
 | Host         : Jerry running 64-bit major release  (build 9200)
 | Command      : report_utilization -file obj/post_synth_util.rpt -hierarchical -hierarchical_depth 4 -hierarchical_min_primitive_count 0
 | Design       : top_level
@@ -19,17 +19,30 @@ Table of Contents
 1. Utilization by Hierarchy
 ---------------------------
 
-+-----------------+-------------------+------------+------------+---------+------+-----+--------+--------+------------+
-|     Instance    |       Module      | Total LUTs | Logic LUTs | LUTRAMs | SRLs | FFs | RAMB36 | RAMB18 | DSP Blocks |
-+-----------------+-------------------+------------+------------+---------+------+-----+--------+--------+------------+
-| top_level       |             (top) |        152 |        152 |       0 |    0 | 157 |      3 |      1 |          0 |
-|   (top_level)   |             (top) |          0 |          0 |       0 |    0 |   7 |      3 |      1 |          0 |
-|   clk_wiz       |         clk_wiz_0 |          0 |          0 |       0 |    0 |   0 |      0 |      0 |          0 |
-|     inst        | clk_wiz_0_clk_wiz |          0 |          0 |       0 |    0 |   0 |      0 |      0 |          0 |
-|   i2s_tx        |   i2s_transmitter |         18 |         18 |       0 |    0 |  35 |      0 |      0 |          0 |
-|   u_midi_parser |       midi_parser |         11 |         11 |       0 |    0 |  23 |      0 |      0 |          0 |
-|   uart_receiver |           uart_rx |         47 |         47 |       0 |    0 |  36 |      0 |      0 |          0 |
-|   vco_1         |               vco |         76 |         76 |       0 |    0 |  56 |      0 |      0 |          0 |
-+-----------------+-------------------+------------+------------+---------+------+-----+--------+--------+------------+
++-------------------------------+---------------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+|            Instance           |                 Module                | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs | RAMB36 | RAMB18 | DSP Blocks |
++-------------------------------+---------------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+| top_level                     |                                 (top) |        920 |        828 |       0 |   92 | 1460 |      3 |      2 |          0 |
+|   (top_level)                 |                                 (top) |          3 |          3 |       0 |    0 |    7 |      3 |      1 |          0 |
+|   clk_wiz                     |                             clk_wiz_0 |          0 |          0 |       0 |    0 |    0 |      0 |      0 |          0 |
+|     inst                      |                     clk_wiz_0_clk_wiz |          0 |          0 |       0 |    0 |    0 |      0 |      0 |          0 |
+|   dbg_hub                     |                            dbg_hub_CV |          0 |          0 |       0 |    0 |    0 |      0 |      0 |          0 |
+|   i2s_tx                      |                       i2s_transmitter |         19 |         19 |       0 |    0 |   35 |      0 |      0 |          0 |
+|   u_ila_0                     |                                 ila_0 |        769 |        677 |       0 |   92 | 1303 |      0 |      1 |          0 |
+|     (u_ila_0)                 |                                 ila_0 |          0 |          0 |       0 |    0 |    0 |      0 |      0 |          0 |
+|     inst                      |                 ila_0_ila_v6_2_20_ila |        769 |        677 |       0 |   92 | 1303 |      0 |      1 |          0 |
+|       (inst)                  |                 ila_0_ila_v6_2_20_ila |          1 |          1 |       0 |    0 |    6 |      0 |      0 |          0 |
+|       ila_core_inst           |            ila_0_ila_v6_2_20_ila_core |        768 |        676 |       0 |   92 | 1297 |      0 |      1 |          0 |
+|         (ila_core_inst)       |            ila_0_ila_v6_2_20_ila_core |         12 |          0 |       0 |   12 |   55 |      0 |      0 |          0 |
+|         ila_trace_memory_inst |    ila_0_ila_v6_2_20_ila_trace_memory |          0 |          0 |       0 |    0 |    0 |      0 |      1 |          0 |
+|         u_ila_cap_ctrl        | ila_0_ila_v6_2_20_ila_cap_ctrl_legacy |         96 |         49 |       0 |   47 |  173 |      0 |      0 |          0 |
+|         u_ila_regs            |        ila_0_ila_v6_2_20_ila_register |        589 |        588 |       0 |    1 |  961 |      0 |      0 |          0 |
+|         u_ila_reset_ctrl      |      ila_0_ila_v6_2_20_ila_reset_ctrl |          9 |          9 |       0 |    0 |   34 |      0 |      0 |          0 |
+|         u_trig                |         ila_0_ila_v6_2_20_ila_trigger |         37 |          7 |       0 |   30 |   42 |      0 |      0 |          0 |
+|         xsdb_memory_read_inst |      ila_0_ltlib_v1_0_4_generic_memrd |         25 |         23 |       0 |    2 |   32 |      0 |      0 |          0 |
+|   u_midi_parser               |                           midi_parser |         18 |         18 |       0 |    0 |   23 |      0 |      0 |          0 |
+|   uart_receiver               |                               uart_rx |         34 |         34 |       0 |    0 |   36 |      0 |      0 |          0 |
+|   vco_1                       |                                   vco |         77 |         77 |       0 |    0 |   56 |      0 |      0 |          0 |
++-------------------------------+---------------------------------------+------------+------------+---------+------+------+--------+--------+------------+
 
 

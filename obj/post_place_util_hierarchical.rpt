@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2026.1 (win64) Build 6511674 Tue Jun 16 11:02:23 MDT 2026
-| Date         : Mon Nov 16 10:43:20 2026
+| Date         : Wed Nov 18 19:30:34 2026
 | Host         : Jerry running 64-bit major release  (build 9200)
 | Command      : report_utilization -file obj/post_place_util_hierarchical.rpt -hierarchical -hierarchical_depth 4 -hierarchical_min_primitive_count 0
 | Design       : top_level
@@ -19,18 +19,40 @@ Table of Contents
 1. Utilization by Hierarchy
 ---------------------------
 
-+-----------------+-------------------+------------+------------+---------+------+-----+--------+--------+------------+
-|     Instance    |       Module      | Total LUTs | Logic LUTs | LUTRAMs | SRLs | FFs | RAMB36 | RAMB18 | DSP Blocks |
-+-----------------+-------------------+------------+------------+---------+------+-----+--------+--------+------------+
-| top_level       |             (top) |        144 |        144 |       0 |    0 | 157 |      3 |      1 |          0 |
-|   (top_level)   |             (top) |          0 |          0 |       0 |    0 |   7 |      3 |      1 |          0 |
-|   clk_wiz       |         clk_wiz_0 |          0 |          0 |       0 |    0 |   0 |      0 |      0 |          0 |
-|     inst        | clk_wiz_0_clk_wiz |          0 |          0 |       0 |    0 |   0 |      0 |      0 |          0 |
-|   i2s_tx        |   i2s_transmitter |         18 |         18 |       0 |    0 |  35 |      0 |      0 |          0 |
-|   u_midi_parser |       midi_parser |         11 |         11 |       0 |    0 |  23 |      0 |      0 |          0 |
-|   uart_receiver |           uart_rx |         46 |         46 |       0 |    0 |  36 |      0 |      0 |          0 |
-|   vco_1         |               vco |         71 |         71 |       0 |    0 |  56 |      0 |      0 |          0 |
-+-----------------+-------------------+------------+------------+---------+------+-----+--------+--------+------------+
++-----------------------------------------+---------------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+|                 Instance                |                 Module                | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs | RAMB36 | RAMB18 | DSP Blocks |
++-----------------------------------------+---------------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+| top_level                               |                                 (top) |       1327 |       1215 |      24 |   88 | 2147 |      3 |      2 |          0 |
+|   (top_level)                           |                                 (top) |          3 |          3 |       0 |    0 |    7 |      3 |      1 |          0 |
+|   clk_wiz                               |                             clk_wiz_0 |          0 |          0 |       0 |    0 |    0 |      0 |      0 |          0 |
+|     inst                                |                     clk_wiz_0_clk_wiz |          0 |          0 |       0 |    0 |    0 |      0 |      0 |          0 |
+|   dbg_hub                               |                               dbg_hub |        449 |        425 |      24 |    0 |  741 |      0 |      0 |          0 |
+|     (dbg_hub)                           |                               dbg_hub |          0 |          0 |       0 |    0 |    0 |      0 |      0 |          0 |
+|     inst                                |            dbg_hub_xsdbm_v3_0_6_xsdbm |        449 |        425 |      24 |    0 |  741 |      0 |      0 |          0 |
+|       (inst)                            |            dbg_hub_xsdbm_v3_0_6_xsdbm |          0 |          0 |       0 |    0 |    0 |      0 |      0 |          0 |
+|       BSCANID.u_xsdbm_id                |         dbg_hub_xsdbm_v3_0_6_xsdbm_id |        449 |        425 |      24 |    0 |  741 |      0 |      0 |          0 |
+|         (BSCANID.u_xsdbm_id)            |         dbg_hub_xsdbm_v3_0_6_xsdbm_id |         35 |         35 |       0 |    0 |   34 |      0 |      0 |          0 |
+|         CORE_XSDB.UUT_MASTER            |        dbg_hub_xsdbm_v3_0_6_icon2xsdb |        273 |        249 |      24 |    0 |  554 |      0 |      0 |          0 |
+|         CORE_XSDB.U_ICON                |             dbg_hub_xsdbm_v3_0_6_icon |         17 |         17 |       0 |    0 |   28 |      0 |      0 |          0 |
+|         SWITCH_N_EXT_BSCAN.bscan_inst   |            dbg_hub_ltlib_v1_0_4_bscan |          0 |          0 |       0 |    0 |    0 |      0 |      0 |          0 |
+|         SWITCH_N_EXT_BSCAN.bscan_switch |     dbg_hub_xsdbm_v3_0_6_bscan_switch |        124 |        124 |       0 |    0 |  125 |      0 |      0 |          0 |
+|   i2s_tx                                |                       i2s_transmitter |         19 |         19 |       0 |    0 |   35 |      0 |      0 |          0 |
+|   u_ila_0                               |                                 ila_0 |        736 |        648 |       0 |   88 | 1249 |      0 |      1 |          0 |
+|     (u_ila_0)                           |                                 ila_0 |          0 |          0 |       0 |    0 |    0 |      0 |      0 |          0 |
+|     inst                                |                 ila_0_ila_v6_2_20_ila |        736 |        648 |       0 |   88 | 1249 |      0 |      1 |          0 |
+|       (inst)                            |                 ila_0_ila_v6_2_20_ila |          1 |          1 |       0 |    0 |    6 |      0 |      0 |          0 |
+|       ila_core_inst                     |            ila_0_ila_v6_2_20_ila_core |        735 |        647 |       0 |   88 | 1243 |      0 |      1 |          0 |
+|         (ila_core_inst)                 |            ila_0_ila_v6_2_20_ila_core |          8 |          0 |       0 |    8 |   47 |      0 |      0 |          0 |
+|         ila_trace_memory_inst           |    ila_0_ila_v6_2_20_ila_trace_memory |          0 |          0 |       0 |    0 |    0 |      0 |      1 |          0 |
+|         u_ila_cap_ctrl                  | ila_0_ila_v6_2_20_ila_cap_ctrl_legacy |         78 |         31 |       0 |   47 |  127 |      0 |      0 |          0 |
+|         u_ila_regs                      |        ila_0_ila_v6_2_20_ila_register |        578 |        577 |       0 |    1 |  961 |      0 |      0 |          0 |
+|         u_ila_reset_ctrl                |      ila_0_ila_v6_2_20_ila_reset_ctrl |          9 |          9 |       0 |    0 |   34 |      0 |      0 |          0 |
+|         u_trig                          |         ila_0_ila_v6_2_20_ila_trigger |         37 |          7 |       0 |   30 |   42 |      0 |      0 |          0 |
+|         xsdb_memory_read_inst           |      ila_0_ltlib_v1_0_4_generic_memrd |         25 |         23 |       0 |    2 |   32 |      0 |      0 |          0 |
+|   u_midi_parser                         |                           midi_parser |         18 |         18 |       0 |    0 |   23 |      0 |      0 |          0 |
+|   uart_receiver                         |                               uart_rx |         33 |         33 |       0 |    0 |   36 |      0 |      0 |          0 |
+|   vco_1                                 |                                   vco |         72 |         72 |       0 |    0 |   56 |      0 |      0 |          0 |
++-----------------------------------------+---------------------------------------+------------+------------+---------+------+------+--------+--------+------------+
 * Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
 
 
