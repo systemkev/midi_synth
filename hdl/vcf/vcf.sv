@@ -84,9 +84,7 @@ module vcf #(
             a1_r <= '0;
             a2_r <= '0;
             a3_r <= '0;
-            audio_out <= '0;
             din_tvalid <= 1'b0;
-            audio_out_vld <= 1'b0;
             state <= SAMPLE;
         end else begin 
             din_tvalid <= 1'b0;
@@ -183,6 +181,8 @@ module vcf #(
             a3_rr <= '0;
             latched_aud <= '0;
             state2 <= IDLE;
+            audio_out <= '0;
+            audio_out_vld <= 1'b0;
         end else begin
             case (state2)
                 IDLE : begin 
