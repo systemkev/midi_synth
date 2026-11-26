@@ -1,0 +1,49 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2026.1 (win64) Build 6511674 Tue Jun 16 11:02:23 MDT 2026
+| Date         : Thu Nov 26 10:13:49 2026
+| Host         : Jerry running 64-bit major release  (build 9200)
+| Command      : report_datasheet -file obj/post_route_datasheet.rpt
+| Design       : top_level
+| Device       : 7s50-csga324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Data Sheet Report
+
+Input Ports Setup/Hold
+
+-----------+----------+---------+-------+---------------+---------+---------------+---------+--------------------+
+Reference  | Input    | IO Reg  | Delay |     Setup(ns) | Process |      Hold(ns) | Process | Internal           |
+Clock      | Port     | Type    | Type  | to Clk (Edge) | Corner  | to Clk (Edge) | Corner  | Clock              |
+-----------+----------+---------+-------+---------------+---------+---------------+---------+--------------------+
+clk_100mhz | rst_bttn | DSP48E1 | -     |    18.425 (r) | SLOW    |    -3.492 (r) | FAST    | clk_out1_clk_wiz_0 |
+clk_100mhz | uart_rx  | FDSE    | -     |     4.935 (r) | SLOW    |    -1.646 (r) | FAST    | clk_out1_clk_wiz_0 |
+-----------+----------+---------+-------+---------------+---------+---------------+---------+--------------------+
+
+
+Output Ports Clock-to-out
+
+-----------+------------+--------+-------+----------------+---------+----------------+---------+--------------------+
+Reference  | Output     | IO Reg | Delay | Max Clk (Edge) | Process | Min Clk (Edge) | Process | Internal           |
+Clock      | Port       | Type   | Type  |    to port(ns) | Corner  |    to port(ns) | Corner  | Clock              |
+-----------+------------+--------+-------+----------------+---------+----------------+---------+--------------------+
+clk_100mhz | I2S2_LRCLK | FDCE   | -     |      5.668 (r) | SLOW    |      0.965 (r) | FAST    | clk_out1_clk_wiz_0 |
+clk_100mhz | I2S2_MCLK  | FDCE   | -     |      5.746 (r) | SLOW    |      0.924 (r) | FAST    | clk_out1_clk_wiz_0 |
+clk_100mhz | I2S2_SCLK  | FDCE   | -     |      5.676 (r) | SLOW    |      0.885 (r) | FAST    | clk_out1_clk_wiz_0 |
+clk_100mhz | I2S2_SDIN  | FDCE   | -     |      5.365 (r) | SLOW    |      0.799 (r) | FAST    | clk_out1_clk_wiz_0 |
+clk_100mhz | uart_tx    | FDRE   | -     |      8.959 (r) | SLOW    |      1.374 (r) | FAST    | clk_out1_clk_wiz_0 |
+-----------+------------+--------+-------+----------------+---------+----------------+---------+--------------------+
+
+
+Setup between Clocks
+
+-----------+-------------+---------------+---------+---------------+---------+---------------+---------+---------------+---------+
+Source     | Destination |  Src:Rise     | Process |  Src:Rise     | Process |  Src:Fall     | Process |  Src:Fall     | Process |
+Clock      | Clock       | Dest:Rise(ns) | Corner  | Dest:Fall(ns) | Corner  | Dest:Rise(ns) | Corner  | Dest:Fall(ns) | Corner  |
+-----------+-------------+---------------+---------+---------------+---------+---------------+---------+---------------+---------+
+clk_100mhz | clk_100mhz  |         9.849 | SLOW    |               |         |               |         |               |         |
+-----------+-------------+---------------+---------+---------------+---------+---------------+---------+---------------+---------+
+
+

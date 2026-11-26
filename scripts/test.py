@@ -1,7 +1,7 @@
 
 import serial
 
-PORT = "COM3"  # Change to your COM port
+PORT = "COM7" 
 BAUD = 115200
 
 with serial.Serial(PORT, BAUD, timeout=1) as ser:

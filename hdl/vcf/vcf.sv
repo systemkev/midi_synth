@@ -151,11 +151,14 @@ module vcf #(
     logic signed [40:0] mult_a2_s1; // Q1.24 * Q8.32 = Q9.56 (chop to Q9.32)
     logic signed [40:0] mult_a2_v3; // Q1.24 * Q8.32 = Q9.56 (chop to Q9.32)
 
+    logic signed [39:0] mult_a3_v3_inter;
+    logic signed [39:0] mult_a2_v3_inter;
+
     // stage 3
     logic signed [42:0] mult_k_bp; // Q3.24 * Q8.32 = Q11.56 (chop off to Q11.32)
 
     typedef enum logic [2:0] {
-        IDLE, BP_LP, HP, OUT
+        IDLE, MULT, BP_LP, HP, OUT
     } state2_t;
     state2_t state2;
 
@@ -183,6 +186,8 @@ module vcf #(
             state2 <= IDLE;
             audio_out <= '0;
             audio_out_vld <= 1'b0;
+            mult_a3_v3_inter <= '0;
+            mult_a2_v3_inter <= '0;
         end else begin
             case (state2)
                 IDLE : begin 
@@ -191,9 +196,11 @@ module vcf #(
                     if (audio_in_vld) begin 
                         v3 <= (audio_in << 9) - s2; 
                         mult_a1_s1 <= (66'($signed({1'b0, a1}) * s1)) >>> 24;
-                        mult_a3_v3 <= (73'($signed({1'b0, a3}) * 40'((audio_in << 9) - s2))) >>> 32;
                         mult_a2_s1 <= (65'($signed({1'b0, a2}) * s1)) >>> 24;
-                        mult_a2_v3 <= (65'($signed({1'b0, a2}) * 40'((audio_in << 9) - s2))) >>> 24;
+
+                        mult_a3_v3_inter <= 40'((audio_in << 9) - s2);
+                        mult_a2_v3_inter <= 40'((audio_in << 9) - s2);
+
                         latched_aud <= audio_in; 
 
                         g_rr  <= g;
@@ -202,8 +209,15 @@ module vcf #(
                         a2_rr <= a2;
                         a3_rr <= a3;
 
-                        state2 <= BP_LP;
+                        state2 <= MULT;
                     end 
+                end 
+
+                MULT : begin 
+                    mult_a3_v3 <= (73'($signed({1'b0, a3_rr}) * mult_a3_v3_inter)) >>> 32;
+                    mult_a2_v3 <= (65'($signed({1'b0, a2_rr}) * mult_a2_v3_inter)) >>> 24;
+                    
+                    state2 <= BP_LP;
                 end 
 
                 BP_LP : begin 

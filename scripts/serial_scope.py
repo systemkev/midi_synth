@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
-PORT = "COM3"  # Change to your working COM port
+PORT = "COM7" 
 BAUD = 115200
 N = 512
 FS = 98_297_872 / 1024

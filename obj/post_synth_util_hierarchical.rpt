@@ -1,0 +1,46 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2026.1 (win64) Build 6511674 Tue Jun 16 11:02:23 MDT 2026
+| Date         : Thu Nov 26 10:12:40 2026
+| Host         : Jerry running 64-bit major release  (build 9200)
+| Command      : report_utilization -file obj/post_synth_util_hierarchical.rpt -hierarchical -hierarchical_depth 4 -hierarchical_min_primitive_count 0
+| Design       : top_level
+| Device       : xc7s50csga324-1
+| Speed File   : -1
+| Design State : Synthesized
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++---------------------------+---------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+|          Instance         |              Module             | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs | RAMB36 | RAMB18 | DSP Blocks |
++---------------------------+---------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+| top_level                 |                           (top) |       2384 |       2382 |       0 |    2 | 5090 |      4 |      1 |         26 |
+|   (top_level)             |                           (top) |         17 |         17 |       0 |    0 |   33 |      4 |      1 |          0 |
+|   clk_wiz                 |                       clk_wiz_0 |          0 |          0 |       0 |    0 |    0 |      0 |      0 |          0 |
+|     inst                  |               clk_wiz_0_clk_wiz |          0 |          0 |       0 |    0 |    0 |      0 |      0 |          0 |
+|   i2s_tx                  |                 i2s_transmitter |         27 |         27 |       0 |    0 |   35 |      0 |      0 |          0 |
+|   u_debug_uart            |                         uart_tx |         54 |         54 |       0 |    0 |   24 |      0 |      0 |          0 |
+|   u_midi_cc_decoder       |                 midi_cc_decoder |          3 |          3 |       0 |    0 |   14 |      0 |      0 |          0 |
+|   u_midi_parser           |                     midi_parser |         25 |         25 |       0 |    0 |   24 |      0 |      0 |          0 |
+|   u_param_mgr             |               parameter_manager |          2 |          2 |       0 |    0 |   21 |      0 |      0 |          0 |
+|   uart_receiver           |                         uart_rx |         41 |         41 |       0 |    0 |   36 |      0 |      0 |          0 |
+|   vca_1                   |                             vca |          0 |          0 |       0 |    0 |    0 |      0 |      0 |          1 |
+|   vcf_1                   |                             vcf |       2078 |       2076 |       0 |    2 | 4796 |      0 |      0 |         25 |
+|     (vcf_1)               |                             vcf |        607 |        607 |       0 |    0 |  523 |      0 |      0 |         25 |
+|     your_divider_inst     |                     div_gen_0_1 |       1471 |       1469 |       0 |    2 | 4273 |      0 |      0 |          0 |
+|       (your_divider_inst) |                     div_gen_0_1 |          0 |          0 |       0 |    0 |    0 |      0 |      0 |          0 |
+|       U0                  |     div_gen_0_1_div_gen_v5_1_26 |       1471 |       1469 |       0 |    2 | 4273 |      0 |      0 |          0 |
+|         (U0)              |     div_gen_0_1_div_gen_v5_1_26 |          0 |          0 |       0 |    0 |    0 |      0 |      0 |          0 |
+|         i_synth           | div_gen_0_1_div_gen_v5_1_26_viv |       1471 |       1469 |       0 |    2 | 4273 |      0 |      0 |          0 |
+|   vco_1                   |                             vco |        137 |        137 |       0 |    0 |  107 |      0 |      0 |          0 |
++---------------------------+---------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+
+

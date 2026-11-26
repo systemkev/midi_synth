@@ -10,6 +10,7 @@
 !//xdc/
 
 !/.gitignore
+!/build.tcl
 
 __pycache__/
 *.pyc

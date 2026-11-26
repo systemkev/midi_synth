@@ -1,0 +1,124 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2026.1 (win64) Build 6511674 Tue Jun 16 11:02:23 MDT 2026
+| Date         : Thu Nov 26 10:13:48 2026
+| Host         : Jerry running 64-bit major release  (build 9200)
+| Command      : report_methodology -file obj/post_route_methodology.rpt
+| Design       : top_level
+| Device       : xc7s50csga324-1
+| Speed File   : -1
+| Design State : Fully Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Report Methodology
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: top_level
+          Floorplan: design_1
+      Design limits: <entire design considered>
+             Max checks: <unlimited>
+             Checks found: 16
++----------+----------+--------------------------------------------+--------+
+| Rule     | Severity | Description                                | Checks |
++----------+----------+--------------------------------------------+--------+
+| LUTAR-1  | Warning  | LUT drives async reset alert               | 1      |
+| SYNTH-6  | Warning  | Timing of a RAM block might be sub-optimal | 1      |
+| SYNTH-10 | Warning  | Wide multiplier                            | 14     |
++----------+----------+--------------------------------------------+--------+
+
+2. REPORT DETAILS
+-----------------
+LUTAR-1#1 Warning
+LUT drives async reset alert  
+LUT cell vcf_1/FSM_sequential_state[1]_i_1__1, with 2 or more inputs, drives asynchronous preset/clear pin(s) i2s_tx/clk_count_reg[0]/CLR, i2s_tx/clk_count_reg[1]/CLR,
+i2s_tx/clk_count_reg[2]/CLR, i2s_tx/clk_count_reg[3]/CLR,
+i2s_tx/clk_count_reg[4]/CLR, i2s_tx/clk_count_reg[5]/CLR,
+i2s_tx/clk_count_reg[6]/CLR, i2s_tx/clk_count_reg[7]/CLR,
+i2s_tx/clk_count_reg[8]/CLR, i2s_tx/clk_count_reg[9]/CLR,
+i2s_tx/i2s_sdout_reg/CLR, i2s_tx/right_reg_reg[0]/CLR,
+i2s_tx/right_reg_reg[10]/CLR, i2s_tx/right_reg_reg[11]/CLR,
+i2s_tx/right_reg_reg[12]/CLR (the first 15 of 35 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+Related violations: <none>
+
+SYNTH-6#1 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance debug_mem_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-10#1 Warning
+Wide multiplier  
+Detected multiplier at vcf_1/mult_a1_s11 of size 9x18, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#2 Warning
+Wide multiplier  
+Detected multiplier at vcf_1/mult_a1_s11__0 of size 9x23, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#3 Warning
+Wide multiplier  
+Detected multiplier at vcf_1/mult_a1_s11__1 of size 18x18, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#4 Warning
+Wide multiplier  
+Detected multiplier at vcf_1/mult_a1_s11__2 of size 18x23, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#5 Warning
+Wide multiplier  
+Detected multiplier at vcf_1/mult_a2_s11__0 of size 25x18, it is decomposed from a wide multipler into 3 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#6 Warning
+Wide multiplier  
+Detected multiplier at vcf_1/mult_a2_v31__0 of size 25x18, it is decomposed from a wide multipler into 3 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#7 Warning
+Wide multiplier  
+Detected multiplier at vcf_1/mult_a3_v31 of size 16x18, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#8 Warning
+Wide multiplier  
+Detected multiplier at vcf_1/mult_a3_v31__0 of size 16x23, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#9 Warning
+Wide multiplier  
+Detected multiplier at vcf_1/mult_a3_v31__1 of size 18x18, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#10 Warning
+Wide multiplier  
+Detected multiplier at vcf_1/mult_a3_v31__2 of size 18x23, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#11 Warning
+Wide multiplier  
+Detected multiplier at vcf_1/mult_k_bp1 of size 10x18, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#12 Warning
+Wide multiplier  
+Detected multiplier at vcf_1/mult_k_bp1__0 of size 18x18, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#13 Warning
+Wide multiplier  
+Detected multiplier at vcf_1/mult_k_bp_reg of size 10x23, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#14 Warning
+Wide multiplier  
+Detected multiplier at vcf_1/mult_k_bp_reg__0 of size 18x23, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+
